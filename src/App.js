@@ -4,7 +4,9 @@ import Todos from './components/Todos'
 import Header from './components/layouts/Header'
 import AddTodo from './components/AddTodo'
 
+
 class App extends Component {
+
   state = {
     todos: [
       {
@@ -25,6 +27,13 @@ class App extends Component {
     ]
   }
 
+  getUniqId = () => {
+    //NOTE We are just using this as a helper function for id's since we aren't using a db yet
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+
   markComplete = (id) => {
     this.setState({ todos: this.state.todos.map(todo => {
       if(todo.id === id) {
@@ -40,7 +49,7 @@ class App extends Component {
 
   addTodo = (title) => {
     const newTodo = {
-      id: '4',
+      id: this.getUniqId(),
       title,
       completed: false
     }
